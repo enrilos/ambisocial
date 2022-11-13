@@ -1,0 +1,16 @@
+$color-blue: red;
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+
+.super-div {
+    background-image: url('@app/scss/img/maxresdefault.jpg');
+    height: 300px;
+}
+
+.super-text {
+    color: $color-blue;
+    font-family: 'Lato', sans-serif;
+
+    & span {
+        color: green;
+    }
+}
