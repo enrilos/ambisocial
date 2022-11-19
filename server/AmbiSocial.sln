@@ -1,9 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.0.31903.59
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AmbiSocial.Web", "AmbiSocial.Web\AmbiSocial.Web.csproj", "{3DDC2249-D8AE-4E71-AAC3-B3CBD16A2DE4}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{9AA3A443-1CBB-42CD-A37B-FBF327ADB024}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AmbiSocial.Web", "Web\AmbiSocial.Web\AmbiSocial.Web.csproj", "{88B1B387-8A15-4403-8AC3-B93681AE3241}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{AA3987C8-6C0D-46B3-AE3E-F0B6FDD8EE7C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AmbiSocial.Data", "Data\AmbiSocial.Data\AmbiSocial.Data.csproj", "{64BC13F8-CDE7-4E23-A3C8-4CEE9F8C4E7E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -14,9 +20,17 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{3DDC2249-D8AE-4E71-AAC3-B3CBD16A2DE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3DDC2249-D8AE-4E71-AAC3-B3CBD16A2DE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3DDC2249-D8AE-4E71-AAC3-B3CBD16A2DE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3DDC2249-D8AE-4E71-AAC3-B3CBD16A2DE4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88B1B387-8A15-4403-8AC3-B93681AE3241}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88B1B387-8A15-4403-8AC3-B93681AE3241}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88B1B387-8A15-4403-8AC3-B93681AE3241}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88B1B387-8A15-4403-8AC3-B93681AE3241}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64BC13F8-CDE7-4E23-A3C8-4CEE9F8C4E7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64BC13F8-CDE7-4E23-A3C8-4CEE9F8C4E7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64BC13F8-CDE7-4E23-A3C8-4CEE9F8C4E7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64BC13F8-CDE7-4E23-A3C8-4CEE9F8C4E7E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{88B1B387-8A15-4403-8AC3-B93681AE3241} = {9AA3A443-1CBB-42CD-A37B-FBF327ADB024}
+		{64BC13F8-CDE7-4E23-A3C8-4CEE9F8C4E7E} = {AA3987C8-6C0D-46B3-AE3E-F0B6FDD8EE7C}
 	EndGlobalSection
 EndGlobal
