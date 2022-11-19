@@ -6,7 +6,7 @@ export default function App() {
         <>
             <div className='super-div'></div>
             <img src={Skull} alt="" />
-            <h2 className='super-text'>This is App running on <span>port</span> {process.env.PORT}</h2>
+            <h2 className='super-text'>This is App running on <span className='ml-2'>port</span> {process.env.PORT}</h2>
         </>
     );
 }

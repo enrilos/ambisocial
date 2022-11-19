@@ -1,5 +1,5 @@
-$color-blue: red;
-@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+@import 'variables.scss';
+@import 'mixin.scss';
 
 .super-div {
     background-image: url('@app/scss/img/maxresdefault.jpg');
@@ -7,10 +7,14 @@ $color-blue: red;
 }
 
 .super-text {
-    color: $color-blue;
-    font-family: 'Lato', sans-serif;
+    color: $color-red;
+    font-family: $font-main;
 
     & span {
         color: green;
+
+        @include mobile {
+            color: blue;
+        }
     }
 }
