@@ -1,2 +1,2 @@
-dev
-	cd public && npm start
+dev:
+	cd client && npm start
