@@ -1,0 +1,20 @@
+@import '@app/scss/variables.scss';
+@import '@app/scss/mixin.scss';
+
+.super-div {
+    background-image: url('@app/scss/img/maxresdefault.jpg');
+    height: 300px;
+}
+
+.super-text {
+    color: $color-red;
+    font-family: $font-main;
+
+    & span {
+        color: green;
+
+        @include mobile {
+            color: blue;
+        }
+    }
+}
