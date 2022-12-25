@@ -1,8 +1,8 @@
-@import '@app/scss/variables.scss';
-@import '@app/scss/mixin.scss';
+@import '../variables.scss';
+@import '../mixin.scss';
 
 .super-div {
-    background-image: url('@app/scss/img/maxresdefault.jpg');
+    background-image: url('../img/maxresdefault.jpg');
     height: 300px;
 }
 

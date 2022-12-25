@@ -1,2 +1,2 @@
 dev:
-	cd client && npm start
+	cd client && npm run dev
