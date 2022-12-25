@@ -12,7 +12,7 @@ export default function HomePage() {
     const env = import.meta.env as { [key: string]: string };
 
     return (
-        <div>
+        <div className="my-4">
             <button onClick={(e) => {
                 e.preventDefault();
                 dispatch(increment());

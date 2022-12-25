@@ -6,6 +6,8 @@ import { persistStore } from 'redux-persist';
 import { store } from '@app/store';
 import App from '@app/app';
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 const persistor = persistStore(store);
 const root = createRoot(document.querySelector('#root')!);
 
