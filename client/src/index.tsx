@@ -3,8 +3,9 @@ import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { persistStore } from 'redux-persist';
-import { ConfigProvider, theme } from 'antd';
+import { ConfigProvider } from 'antd';
 import { ThemeConfig } from 'antd/es/config-provider/context';
+import { Locale } from 'antd/es/locale';
 import { store } from '@app/store';
 import App from '@app/app';
 
@@ -16,15 +17,20 @@ const root = createRoot(document.querySelector('#root')!);
 
 const ambiTheme: ThemeConfig = {
     token: {
-        colorPrimary: styleVars.colorMain
+        colorPrimary: styleVars.colorMain,
+        fontFamily: styleVars.fontMain
     }
-}
+};
+
+const browserLocale: Locale = {
+    locale: window.navigator.language ? window.navigator.language : 'en-US'
+};
 
 root.render(
     <React.StrictMode>
         <Provider store={store}>
             <PersistGate loading={null} persistor={persistor}>
-                <ConfigProvider theme={ambiTheme}>
+                <ConfigProvider theme={ambiTheme} locale={browserLocale}>
                     <App />
                 </ConfigProvider>
             </PersistGate>

@@ -14,6 +14,7 @@ export default function HomePage() {
 
     return (
         <div className="my-4">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae, atque! Ad quis exercitationem omnis vero eaque! Nulla accusantium est maxime et id vel quaerat, commodi eaque, facilis blanditiis aliquid harum?</p>
             <Button type="primary" onClick={(e) => {
                 e.preventDefault();
                 dispatch(increment());
