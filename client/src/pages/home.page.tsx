@@ -1,3 +1,4 @@
+import { Button } from 'antd';
 import { useDispatch } from 'react-redux';
 import { useCounter } from '@app/store/selectors';
 import { decrement, increment } from '@app/store/counter.store';
@@ -13,21 +14,21 @@ export default function HomePage() {
 
     return (
         <div className="my-4">
-            <button onClick={(e) => {
+            <Button type="primary" onClick={(e) => {
                 e.preventDefault();
                 dispatch(increment());
             }}
             >
                 Increment
-            </button>
+            </Button>
             <span>{counter.value}</span>
-            <button onClick={(e) => {
+            <Button type="primary" onClick={(e) => {
                 e.preventDefault();
                 dispatch(decrement());
             }}
             >
                 Decrement
-            </button>
+            </Button>
             <div className='super-div'></div>
             <img src={Skull} alt="" />
             <h2 className='super-text'>This is App running on <span className='ml-2'>{env.APP_ENV}</span> env, port: {env.APP_PORT}</h2>

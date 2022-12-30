@@ -1,0 +1,9 @@
+@import './variables.scss';
+
+.ant-btn-primary {
+    background-color: $color-main !important;
+
+    &:hover {
+        background-color: $color-main-light !important;
+    }
+}
