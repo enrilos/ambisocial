@@ -6,6 +6,7 @@
     "serve": "vite preview"
   },
   "dependencies": {
+    "@ant-design/icons": "^4.8.0",
     "@reduxjs/toolkit": "^1.9.1",
     "antd": "^5.1.2",
     "bootstrap": "^5.2.3",

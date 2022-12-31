@@ -9,6 +9,7 @@ export default function AppRoutes() {
             <Header />
             <Routes>
                 <Route path="/" element={<HomePage />} />
+                <Route path="/why/abc" element={(<>Owing to the fact that</>)} />
             </Routes>
             <Footer />
         </>
