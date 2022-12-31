@@ -24,8 +24,14 @@ export default function Header() {
     }, [location.pathname]);
 
     const clickHandler = (e: any) => {
+        e.preventDefault();
         setCurrent(e.key ?? '');
     };
 
-    return <Menu onClick={clickHandler} selectedKeys={[current]} items={items} mode="horizontal" />;
+    return <Menu
+        onClick={clickHandler}
+        selectedKeys={[current]}
+        items={items}
+        mode="horizontal"
+    />;
 }
