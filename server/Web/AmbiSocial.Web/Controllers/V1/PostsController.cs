@@ -11,7 +11,7 @@
 
 
         [HttpGet]
-        public IEnumerable<object> Get()
+        public ActionResult<IEnumerable<object>> Get()
         {
             var objects = new List<object>()
             {
@@ -28,6 +28,26 @@
             };
 
             return objects;
+        }
+
+        [HttpGet("{id:int}")]
+        public ActionResult Get(int id)
+        {
+            var objects = new List<object>()
+            {
+                new
+                {
+                    Origin = "Smithsonian",
+                    Value = "Considerably high"
+                },
+                new
+                {
+                    Name = "Norwegian",
+                    Value = "High"
+                }
+            };
+
+            return Ok(objects[1]);
         }
     }
 }
