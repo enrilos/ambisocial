@@ -6,7 +6,7 @@ import { MailOutlined } from '@ant-design/icons';
 
 const items: ItemType[] = [
     {
-        label: (<Link to='/why/abc'>Why</Link>),
+        label: (<Link to='/why'>Why</Link>),
         key: 'why',
         icon: <MailOutlined />
     }
@@ -17,10 +17,8 @@ export default function Header() {
     const location = useLocation();
 
     useEffect(() => {
-        const pathname = location.pathname.replace('/', '');
-        const endIndex = (pathname.indexOf('/') > 0) ? pathname.indexOf('/') : pathname.length;
-        const key = pathname.substring(0, endIndex);
-        setCurrent(key);
+        const keys = location.pathname.split('/').filter(key => key);
+        setCurrent(keys[0] ?? '');
     }, [location.pathname]);
 
     const clickHandler = (e: any) => {
