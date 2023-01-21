@@ -9,5 +9,6 @@ WORKDIR /app
 COPY --from=build /app ./
 
 EXPOSE 80
+ENV DefaultDockerConnection=Host=db;Database=ambisocial;Username=emre;Password=test;
 
 ENTRYPOINT ["dotnet", "AmbiSocial.Web.dll"]
