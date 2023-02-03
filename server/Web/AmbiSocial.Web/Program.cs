@@ -18,12 +18,6 @@ builder.Services
 
 var app = builder.Build();
 
-using (var serviceScope = app.Services.CreateScope())
-{
-    var dbContext = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-    dbContext.Database.Migrate();
-}
-
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();

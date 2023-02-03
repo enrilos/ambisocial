@@ -1,35 +1,22 @@
-import { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
-import { Menu } from "antd";
-import { ItemType } from "antd/es/menu/hooks/useItems";
-import { MailOutlined } from '@ant-design/icons';
+import { Link } from "react-router-dom";
+import { UserOutlined } from "@ant-design/icons";
 
-const items: ItemType[] = [
-    {
-        label: (<Link to='/why'>Why</Link>),
-        key: 'why',
-        icon: <MailOutlined />
-    }
-];
+import '@app/scss/_header.scss';
 
 export default function Header() {
-    const [current, setCurrent] = useState<string>('');
-    const location = useLocation();
-
-    useEffect(() => {
-        const keys = location.pathname.split('/').filter(key => key);
-        setCurrent(keys[0] ?? '');
-    }, [location.pathname]);
-
-    const clickHandler = (e: any) => {
-        e.domEvent.preventDefault();
-        setCurrent(e.key ?? '');
-    };
-
-    return <Menu
-        onClick={clickHandler}
-        selectedKeys={[current]}
-        items={items}
-        mode="horizontal"
-    />;
+    return (
+        <header className='p-4 mx-5'>
+            <nav className='d-flex justify-content-between align-items-center'>
+                <Link to='/' className='nav-link-main'>AmbiSocial</Link>
+                <section className='d-flex justify-content-between align-items-center nav-links-wrapper'>
+                    <Link to='/discover'>Discover</Link>
+                    <Link to='/why'>Why</Link>
+                    <Link to='/contact'>Contact</Link>
+                    <div className='nav-auth-wrapper'>
+                        <Link to='/login'><UserOutlined /></Link>
+                    </div>
+                </section>
+            </nav>
+        </header>
+    );
 }

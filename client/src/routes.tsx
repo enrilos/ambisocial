@@ -16,8 +16,9 @@ export default function AppRoutes() {
         <Suspense fallback={<Loader />}>
             <Header />
             <Routes>
-                <Route path="/" element={<Page title={ambiTitle('Home')} component={HomePage} />} />
-                <Route path="/why" element={(<>Owing to the fact that</>)} />
+                <Route path="/" element={<Page title={'AmbiSocial - Where extroverts and introverts meet'} component={HomePage} />} />
+                <Route path="/discover" element={<Page title={ambiTitle('Discover')} component={() => <div>Discover like-minded people</div>} />} />
+                <Route path="/why" element={<Page title={ambiTitle('Why')} component={() => <div>Owing to the fact that</div>} />} />
             </Routes>
             <Footer />
         </Suspense>

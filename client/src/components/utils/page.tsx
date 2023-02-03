@@ -10,9 +10,7 @@ export interface IPage {
 
 export default function Page(page: IPage) {
     useEffect(() => {
-        return () => {
-            document.title = page.title;
-        }
+        document.title = page.title;
     }, [page.title]);
 
     return React.createElement(page.component, page?.props, page?.children);
