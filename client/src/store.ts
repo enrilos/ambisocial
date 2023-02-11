@@ -1,25 +1,26 @@
-import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit';
 import counterReducer from '@app/store/counter.store';
-import storage from 'redux-persist/lib/storage';
-import persistReducer from 'redux-persist/es/persistReducer';
 
-const reducers = combineReducers({
+const reducer = {
     counter: counterReducer
-});
-
-const persistConfig = {
-    key: 'root',
-    storage: storage,
-    whitelist: ['counter']
 };
 
-const persistedReducer = persistReducer(persistConfig, reducers);
+const preloadedState = JSON.parse(localStorage.getItem('redux') ?? '{}');
+
+/*const persistStoreMiddleware = (store: any) => (next: any) => (action: any) => {
+    localStorage.setItem('redux', JSON.stringify({ ...store.getState(), ...action.payload }));
+    next(action);
+}*/
 
 export const store = configureStore({
-    reducer: persistedReducer,
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware({
-        serializableCheck: false
-    }),
+    reducer,
+    /*middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(persistStoreMiddleware),*/
+    preloadedState
+});
+
+// TODO: Refactor and use a debouncer.
+store.subscribe(() => {
+    localStorage.setItem('redux', JSON.stringify(store.getState()));
 });
 
 export type RootState = ReturnType<typeof store.getState>

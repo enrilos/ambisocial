@@ -1,7 +1,7 @@
 import { Button } from 'antd';
 import { useDispatch } from 'react-redux';
 import { useCounter } from '@app/store/selectors';
-import { decrement, increment } from '@app/store/counter.store';
+import { decrement, incrementBy } from '@app/store/counter.store';
 import Skull from '@app/scss/img/skull.svg';
 
 import '@app/scss/pages/_home.page.scss';
@@ -17,7 +17,7 @@ export default function HomePage(props?: { [key: string]: any }) {
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae, atque! Ad quis exercitationem omnis vero eaque! Nulla accusantium est maxime et id vel quaerat, commodi eaque, facilis blanditiis aliquid harum?</p>
             <Button type='primary' onClick={(e) => {
                 e.preventDefault();
-                dispatch(increment());
+                dispatch(incrementBy(2));
             }}
             >
                 Increment
