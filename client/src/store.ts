@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import counterReducer from '@app/store/counter.store';
+import { debounce } from '@app/utils/func';
 
 const reducer = {
     counter: counterReducer
@@ -18,10 +19,9 @@ export const store = configureStore({
     preloadedState
 });
 
-// TODO: Refactor and use a debouncer.
-store.subscribe(() => {
+store.subscribe(debounce(() => {
     localStorage.setItem('redux', JSON.stringify(store.getState()));
-});
+}));
 
 export type RootState = ReturnType<typeof store.getState>
 
