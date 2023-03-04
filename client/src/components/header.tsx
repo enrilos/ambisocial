@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
-import { UserOutlined } from "@ant-design/icons";
+import { Link } from 'react-router-dom';
+import { UserOutlined } from '@ant-design/icons';
 
 import '@app/scss/_header.scss';
 

@@ -3,19 +3,19 @@
 @font-face {
     font-family: Lato;
     font-weight: 300;
-    src: url('./font/Lato/Lato-Light.ttf');
+    src: url('@app/scss/font/Lato/Lato-Light.ttf');
 }
 
 @font-face {
     font-family: Lato;
     font-weight: 500;
-    src: url('./font/Lato/Lato-Regular.ttf');
+    src: url('@app/scss/font/Lato/Lato-Regular.ttf');
 }
 
 @font-face {
     font-family: Lato;
     font-weight: 800;
-    src: url('./font/Lato/Lato-Bold.ttf');
+    src: url('@app/scss/font/Lato/Lato-Bold.ttf');
 }
 
 body {

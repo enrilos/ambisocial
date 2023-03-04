@@ -1,5 +1,6 @@
 using AmbiSocial.Data;
 using AmbiSocial.Data.Models;
+
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,7 +10,7 @@ builder.Services.AddEndpointsApiExplorer();
 
 builder.Services
     .AddDbContext<ApplicationDbContext>(options =>
-        options.UseNpgsql(Environment.GetEnvironmentVariable("DefaultDockerConnection") ?? builder.Configuration.GetConnectionString("DefaultConnection")));
+        options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services
     .AddDefaultIdentity<ApplicationUser>(IdentityOptionsProvider.GetIdentityOptions)

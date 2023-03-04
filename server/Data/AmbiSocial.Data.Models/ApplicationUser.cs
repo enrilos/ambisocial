@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Generic;
 
-    using AmbiSocial.Data.Common.Models;
+    using Common.Models;
 
     using Microsoft.AspNetCore.Identity;
 
