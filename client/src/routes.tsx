@@ -15,9 +15,9 @@ export default function AppRoutes() {
         <section className='d-flex flex-column min-vh-100'>
             <Suspense fallback={<Loader />}>
                 <Routes>
-                    <Route path='/' element={<Page title={'AmbiSocial - Where extroverts and introverts meet'} component={HomePage} />} />
-                    <Route path='/discover' element={<Page title={ambiTitle('Discover')} component={() => <div>Discover like-minded people</div>} />} />
-                    <Route path='/why' element={<Page title={ambiTitle('Why')} component={() => <div>Owing to the fact that</div>} />} />
+                    <Route path='/' element={<Page title={'AmbiSocial - Where extroverts and introverts meet'} component={{ component: HomePage }} />} />
+                    <Route path='/discover' element={<Page title={ambiTitle('Discover')} component={{ component: () => <div>Discover like-minded people</div> }} />} />
+                    <Route path='/why' element={<Page title={ambiTitle('Why')} component={{ component: () => <div>Owing to the fact that</div> }} />} />
                 </Routes>
                 <Footer />
             </Suspense>

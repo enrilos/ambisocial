@@ -1,10 +1,9 @@
 import React, { useEffect } from 'react';
+import { IComponent } from '@app/interfaces/component.interface';
 
 export interface IPage {
     title: string,
-    component: React.FC,
-    props?: { [key: string]: any },
-    children?: React.ReactNode[]
+    component: IComponent,
     restricted?: boolean
 }
 
@@ -13,5 +12,7 @@ export default function Page(page: IPage) {
         document.title = page.title;
     }, [page.title]);
 
-    return React.createElement(page.component, page?.props, page?.children);
+    const { component, props, children } = page.component;
+
+    return React.createElement(component, props, children);
 }
