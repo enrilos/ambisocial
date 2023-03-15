@@ -7,14 +7,11 @@ using System.Linq.Expressions;
 
 public abstract class Specification<T>
 {
-    private static readonly ConcurrentDictionary<string, Func<T, bool>> delegateCache;
+    private static readonly ConcurrentDictionary<string, Func<T, bool>> DelegateCache = new();
     private readonly List<string> cacheKey;
 
     protected Specification()
-    {
-        delegateCache = new();
-        cacheKey = new() { GetType().Name };
-    }
+        => this.cacheKey = new() { GetType().Name };
 
     protected virtual bool Include => true;
 
@@ -25,9 +22,9 @@ public abstract class Specification<T>
             return true;
         }
 
-        var func = delegateCache.GetOrAdd(
-            string.Join(string.Empty, cacheKey),
-            _ => ToExpression().Compile());
+        var func = DelegateCache.GetOrAdd(
+            string.Join(string.Empty, this.cacheKey),
+            _ => this.ToExpression().Compile());
 
         return func(value);
     }

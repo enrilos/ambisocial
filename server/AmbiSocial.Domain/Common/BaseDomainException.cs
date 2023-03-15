@@ -8,7 +8,7 @@ public abstract class BaseDomainException : Exception
 
     public string Error
     {
-        get => error ?? base.Message;
-        set => error = value;
+        get => this.error ?? base.Message;
+        set => this.error = value;
     }
 }
