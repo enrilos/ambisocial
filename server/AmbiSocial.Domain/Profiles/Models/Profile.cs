@@ -38,7 +38,11 @@ public class Profile : Entity<int>, IAggregateRoot
     private void Validate(string userName, string description)
     {
         this.ValidateUserName(userName);
-        this.ValidateDescription(description);
+
+        if (description is not null)
+        {
+            this.ValidateDescription(description);
+        }
     }
 
     private void ValidateUserName(string userName)
