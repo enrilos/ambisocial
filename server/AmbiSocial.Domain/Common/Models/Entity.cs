@@ -15,7 +15,7 @@ public abstract class Entity<TId> : IEntity where TId : struct
 
     public void ClearEvents() => this.events.Clear();
 
-    protected void AddEvent(IDomainEvent domainEvent) => this.events.Add(domainEvent);
+    protected void RaiseEvent(IDomainEvent domainEvent) => this.events.Add(domainEvent);
 
     public override bool Equals(object? obj)
     {
