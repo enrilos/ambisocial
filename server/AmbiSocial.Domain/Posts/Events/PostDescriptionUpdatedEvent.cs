@@ -6,8 +6,8 @@ public class PostDescriptionUpdatedEvent : IDomainEvent
 {
     public PostDescriptionUpdatedEvent(int id, string description)
     {
-        Id = id;
-        Description = description;
+        this.Id = id;
+        this.Description = description;
     }
 
     public int Id { get; }

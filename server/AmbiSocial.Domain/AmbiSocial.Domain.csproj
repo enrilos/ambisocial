@@ -9,12 +9,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="NewFolder\**" />
-    <EmbeddedResource Remove="NewFolder\**" />
-    <None Remove="NewFolder\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="FluentAssertions" Version="6.10.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.3.2" />
     <PackageReference Include="xunit" Version="2.4.2" />
@@ -29,16 +23,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Identity\Exceptions\" />
-    <Folder Include="Identity\Factories\" />
-    <Folder Include="Identity\Models\" />
-    <Folder Include="Identity\Repositories\" />
-    <Folder Include="Identity\Specifications\" />
-    <Folder Include="Posts\Exceptions\" />
-    <Folder Include="Posts\Factories\" />
-    <Folder Include="Posts\Models\Posts\" />
-    <Folder Include="Posts\Specifications\" />
-    <Folder Include="Posts\Repositories\" />
+    <Folder Include="Profiles\Events\" />
+    <Folder Include="Profiles\Factories\" />
+    <Folder Include="Profiles\Repositories\" />
+    <Folder Include="Profiles\Specifications\" />
   </ItemGroup>
 
 </Project>
