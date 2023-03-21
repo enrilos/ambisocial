@@ -4,6 +4,8 @@ using System;
 
 public static class Guard
 {
+    private const string OutOfRangeExceptionTemplate = "{0} must be between {1} and {2}";
+
     public static void AgainstNullOrEmpty<TException>(string value, string name = "Value")
         where TException : BaseDomainException, new()
     {
@@ -12,20 +14,20 @@ public static class Guard
             return;
         }
 
-        ThrowException<TException>($"{name} cannot be null or empty.");
+        ThrowException<TException>($"{name} cannot be null or empty");
     }
 
-    public static void ForStringLength<TException>(string value, int minLength, int maxLength, string name = "Value")
+    public static void ForStringLength<TException>(string value, int min, int max, string name = "Value")
         where TException : BaseDomainException, new()
     {
         AgainstNullOrEmpty<TException>(value, name);
 
-        if (minLength <= value.Length && value.Length <= maxLength)
+        if (min <= value.Length && value.Length <= max)
         {
             return;
         }
 
-        ThrowException<TException>($"{name} must have between {minLength} and {maxLength} symbols.");
+        ThrowException<TException>($"{string.Format(OutOfRangeExceptionTemplate, name, min, max)} characters long");
     }
 
     public static void AgainstOutOfRange<TException>(int number, int min, int max, string name = "Value")
@@ -36,7 +38,7 @@ public static class Guard
             return;
         }
 
-        ThrowException<TException>($"{name} must be between {min} and {max}.");
+        ThrowException<TException>(string.Format(OutOfRangeExceptionTemplate, name, min, max));
     }
 
     public static void AgainstOutOfRange<TException>(decimal number, decimal min, decimal max, string name = "Value")
@@ -47,7 +49,7 @@ public static class Guard
             return;
         }
 
-        ThrowException<TException>($"{name} must be between {min} and {max}.");
+        ThrowException<TException>(string.Format(OutOfRangeExceptionTemplate, name, min, max));
     }
 
     public static void ForValidUrl<TException>(string url, string name = "Value")
@@ -61,7 +63,7 @@ public static class Guard
             return;
         }
 
-        ThrowException<TException>($"{name} must be a valid URL.");
+        ThrowException<TException>($"{name} must be a valid URL");
     }
 
     private static void ThrowException<TException>(string message)

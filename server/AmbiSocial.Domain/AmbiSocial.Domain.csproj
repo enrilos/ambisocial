@@ -36,7 +36,7 @@
     <Folder Include="Identity\Specifications\" />
     <Folder Include="Posts\Exceptions\" />
     <Folder Include="Posts\Factories\" />
-    <Folder Include="Posts\Models\" />
+    <Folder Include="Posts\Models\Posts\" />
     <Folder Include="Posts\Specifications\" />
     <Folder Include="Posts\Repositories\" />
   </ItemGroup>
