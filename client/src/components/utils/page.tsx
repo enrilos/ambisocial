@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { IComponent } from '@app/interfaces/component.interface';
+import IComponent from '@app/interfaces/component.interface';
 
 export interface IPage {
     title: string,
