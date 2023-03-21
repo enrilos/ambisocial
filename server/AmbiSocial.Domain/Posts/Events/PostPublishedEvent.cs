@@ -1,12 +1,14 @@
-﻿namespace AmbiSocial.Domain.Common.Events.Posts;
+﻿namespace AmbiSocial.Domain.Posts.Events;
+
+using Common;
 
 public class PostPublishedEvent : IDomainEvent
 {
     public PostPublishedEvent(int id, string imageUrl, string description)
     {
-        this.Id = id;
-        this.ImageUrl = imageUrl;
-        this.Description = description;
+        Id = id;
+        ImageUrl = imageUrl;
+        Description = description;
     }
 
     public int Id { get; }

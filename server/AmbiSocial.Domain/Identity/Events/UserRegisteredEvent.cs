@@ -1,9 +1,11 @@
-﻿namespace AmbiSocial.Domain.Common.Events.Identity;
+﻿namespace AmbiSocial.Domain.Identity.Events;
+
+using Common;
 
 public class UserRegisteredEvent : IDomainEvent
 {
     public UserRegisteredEvent(string userName)
-        => this.UserName = userName;
+        => UserName = userName;
 
     public string UserName { get; }
 }

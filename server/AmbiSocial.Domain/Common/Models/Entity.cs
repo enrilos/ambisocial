@@ -2,7 +2,6 @@ namespace AmbiSocial.Domain.Common.Models;
 
 using System.Collections.Generic;
 using System.Linq;
-using Events;
 
 public abstract class Entity<TId> : IEntity where TId : struct
 {
