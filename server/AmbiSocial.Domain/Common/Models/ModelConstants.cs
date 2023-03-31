@@ -11,4 +11,12 @@ public class ModelConstants
         public const int MaxDescriptionLength = 1024;
         public const string AdministratorRoleName = "Administrator";
     }
+
+    public class Identity
+    {
+        public const int MinEmailLength = 3;
+        public const int MaxEmailLength = 64;
+        public const int MinPasswordLength = 8;
+        public const int MaxPasswordLength = 80;
+    }
 }
