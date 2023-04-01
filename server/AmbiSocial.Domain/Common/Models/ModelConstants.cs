@@ -18,5 +18,6 @@ public class ModelConstants
         public const int MaxEmailLength = 64;
         public const int MinPasswordLength = 8;
         public const int MaxPasswordLength = 80;
+        public const string DefaultDescription = "Apparently, this user prefers to keep an air of mystery about them";
     }
 }

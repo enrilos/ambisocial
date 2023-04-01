@@ -26,7 +26,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Profiles\" />
     <Folder Include="Posts\" />
   </ItemGroup>
 

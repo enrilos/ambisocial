@@ -35,6 +35,15 @@ public class Profile : Entity<int>, IAggregateRoot
 
     public IReadOnlyCollection<Profile> Following => this.following.ToList().AsReadOnly();
 
+    public Profile UpdateDescription(string description)
+    {
+        this.ValidateDescription(description);
+
+        this.Description = description;
+
+        return this;
+    }
+
     private void Validate(string userName, string description)
     {
         this.ValidateUserName(userName);
