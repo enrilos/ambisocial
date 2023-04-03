@@ -26,7 +26,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Posts\" />
+    <Folder Include="Posts\Queries\Details\" />
+    <Folder Include="Posts\Queries\Search\" />
   </ItemGroup>
 
   <ItemGroup>
