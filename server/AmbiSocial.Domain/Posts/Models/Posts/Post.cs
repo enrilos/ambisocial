@@ -12,7 +12,7 @@ public class Post : Entity<int>, IAggregateRoot
 {
     internal Post(string imageUrl, string description, Profile profile)
     {
-        this.Validate(imageUrl, description);
+        this.Validate(imageUrl, description, profile);
 
         this.ImageUrl = imageUrl;
         this.Description = description;
@@ -21,7 +21,8 @@ public class Post : Entity<int>, IAggregateRoot
 
         this.RaiseEvent(new PostCreatedEvent(
             this.ImageUrl,
-            this.Description));
+            this.Description,
+            this.Profile.UserName));
     }
 
     public string ImageUrl { get; private set; }
@@ -55,10 +56,11 @@ public class Post : Entity<int>, IAggregateRoot
         return this;
     }
 
-    private void Validate(string imageUrl, string description)
+    private void Validate(string imageUrl, string description, Profile profile)
     {
         this.ValidateUrl(imageUrl);
         this.ValidateDescription(description);
+        this.ValidateProfile(profile);
     }
 
     private void ValidateUrl(string url)
@@ -72,4 +74,9 @@ public class Post : Entity<int>, IAggregateRoot
             MinDescriptionLength,
             MaxDescriptionLength,
             nameof(this.Description));
+
+    private void ValidateProfile(Profile profile)
+        => Guard.AgainstNull<InvalidPostException>(
+            profile,
+            nameof(this.Profile));
 }

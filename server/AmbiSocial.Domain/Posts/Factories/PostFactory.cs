@@ -11,7 +11,6 @@ public class PostFactory : IPostFactory
     private Profile postProfile = default!;
 
     private bool isImageUrlSet = false;
-    private bool isDescriptionSet = false;
     private bool isProfileSet = false;
 
     public IPostFactory WithImageUrl(string imageUrl)
@@ -25,8 +24,6 @@ public class PostFactory : IPostFactory
     public IPostFactory WithDescription(string description)
     {
         this.postDescription = description;
-        this.isDescriptionSet = true;
-
         return this;
     }
 
@@ -40,11 +37,11 @@ public class PostFactory : IPostFactory
 
     public Post Build()
     {
-        bool areRequiredFieldsSet = this.isImageUrlSet && this.isDescriptionSet && this.isProfileSet;
+        bool areRequiredFieldsSet = this.isImageUrlSet && this.isProfileSet;
 
         if (!areRequiredFieldsSet)
         {
-            throw new InvalidPostException("Image, description and profile must have a value");
+            throw new InvalidPostException("Image and profile must have a value");
         }
 
         return new Post(

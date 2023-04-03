@@ -6,6 +6,17 @@ public static class Guard
 {
     private const string OutOfRangeExceptionTemplate = "{0} must be between {1} and {2}";
 
+    public static void AgainstNull<TException>(object value, string name = "Value")
+        where TException : BaseDomainException, new()
+    {
+        if (value is not null)
+        {
+            return;
+        }
+
+        ThrowException<TException>($"{name} cannot be null");
+    }
+
     public static void AgainstNullOrEmpty<TException>(string value, string name = "Value")
         where TException : BaseDomainException, new()
     {
