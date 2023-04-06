@@ -13,11 +13,12 @@ public class Profile : Entity<int>, IAggregateRoot
     private readonly HashSet<Profile> followers;
     private readonly HashSet<Profile> following;
 
-    internal Profile(string userName, string description)
+    internal Profile(string userName, string avatarUrl, string description)
     {
-        this.Validate(userName, description);
+        this.Validate(userName, avatarUrl, description);
 
         this.UserName = userName;
+        this.AvatarUrl = avatarUrl;
         this.Description = description;
 
         this.posts = new();
@@ -26,6 +27,8 @@ public class Profile : Entity<int>, IAggregateRoot
     }
 
     public string UserName { get; private set; }
+
+    public string AvatarUrl { get; private set; }
 
     public string Description { get; private set; }
 
@@ -44,9 +47,10 @@ public class Profile : Entity<int>, IAggregateRoot
         return this;
     }
 
-    private void Validate(string userName, string description)
+    private void Validate(string userName, string avatarUrl, string description)
     {
         this.ValidateUserName(userName);
+        this.ValidateAvatarUrl(avatarUrl);
 
         if (description is not null)
         {
@@ -60,6 +64,11 @@ public class Profile : Entity<int>, IAggregateRoot
             MinNameLength,
             MaxNameLength,
             nameof(this.UserName));
+
+    private void ValidateAvatarUrl(string url)
+        => Guard.ForValidUrl<InvalidProfileException>(
+            url,
+            nameof(this.AvatarUrl));
 
     private void ValidateDescription(string description)
         => Guard.ForStringLength<InvalidProfileException>(

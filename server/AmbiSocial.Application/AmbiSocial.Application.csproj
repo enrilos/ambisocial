@@ -26,11 +26,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Posts\Queries\Details\" />
-    <Folder Include="Posts\Queries\Search\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\AmbiSocial.Domain\AmbiSocial.Domain.csproj" />
   </ItemGroup>
 

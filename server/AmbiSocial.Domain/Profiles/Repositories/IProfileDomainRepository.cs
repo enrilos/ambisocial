@@ -5,7 +5,7 @@ using Models;
 
 public interface IProfileDomainRepository : IDomainRepository<Profile>
 {
-    Task<Profile> FindByUserName(
+    Task<Profile?> FindByUserName(
         string userName,
         CancellationToken cancellationToken = default);
 }

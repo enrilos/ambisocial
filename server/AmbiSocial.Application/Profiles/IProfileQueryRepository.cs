@@ -3,13 +3,14 @@
 using AmbiSocial.Domain.Common;
 using Common.Contracts;
 using Domain.Profiles.Models;
+using Queries.Common;
 using Queries.Details;
 
 public interface IProfileQueryRepository : IQueryRepository<Profile>
 {
-    Task<ProfileDetailsResponseModel> Details(string userName, CancellationToken cancellationToken = default);
+    Task<ProfileDetailsResponseModel?> Details(string userName, CancellationToken cancellationToken = default);
 
-    Task<IEnumerable<ProfileDetailsResponseModel>> List(
+    Task<IEnumerable<ProfileResponseModel>> List(
         Specification<Profile> specification,
         int skip,
         int take = int.MaxValue,
