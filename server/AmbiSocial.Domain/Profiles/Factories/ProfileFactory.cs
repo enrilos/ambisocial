@@ -6,6 +6,7 @@ using Models;
 public class ProfileFactory : IProfileFactory
 {
     private string profileUserName = default!;
+    private string profileAvatarUrl = default!;
     private string profileDescription = default!;
 
     private bool isUserNameSet = false;
@@ -13,6 +14,13 @@ public class ProfileFactory : IProfileFactory
     public IProfileFactory WithDescription(string description)
     {
         this.profileDescription = description;
+
+        return this;
+    }
+
+    public IProfileFactory WithAvatarUrl(string avatarUrl)
+    {
+        this.profileAvatarUrl = avatarUrl;
 
         return this;
     }
@@ -32,6 +40,6 @@ public class ProfileFactory : IProfileFactory
             throw new InvalidProfileException("Username is required");
         }
 
-        return new Profile(this.profileUserName, this.profileDescription);
+        return new Profile(this.profileUserName, this.profileAvatarUrl, this.profileDescription);
     }
 }
