@@ -8,7 +8,9 @@ using Queries.Details;
 
 public interface IProfileQueryRepository : IQueryRepository<Profile>
 {
-    Task<ProfileDetailsResponseModel?> Details(string userName, CancellationToken cancellationToken = default);
+    Task<ProfileDetailsResponseModel?> Details(
+        string userName,
+        CancellationToken cancellationToken = default);
 
     Task<IEnumerable<ProfileResponseModel>> List(
         Specification<Profile> specification,
@@ -16,5 +18,7 @@ public interface IProfileQueryRepository : IQueryRepository<Profile>
         int take = int.MaxValue,
         CancellationToken cancellationToken = default);
 
-    Task<int> Total(Specification<Profile> specification, CancellationToken cancellationToken = default);
+    Task<int> Total(
+        Specification<Profile> specification,
+        CancellationToken cancellationToken = default);
 }
