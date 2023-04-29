@@ -9,7 +9,6 @@ public class PostCreatedEvent : IDomainEvent
         this.ImageUrl = imageUrl;
         this.Description = description;
         this.UserName = userName;
-
     }
 
     public string ImageUrl { get; }

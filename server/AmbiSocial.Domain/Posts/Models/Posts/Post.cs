@@ -25,6 +25,15 @@ public class Post : Entity<int>, IAggregateRoot
             this.Profile.UserName));
     }
 
+    private Post(string imageUrl, string description)
+    {
+        this.ImageUrl = imageUrl;
+        this.Description = description;
+        this.Date = DateTime.UtcNow;
+
+        this.Profile = default!;
+    }
+
     public string ImageUrl { get; private set; }
 
     public string Description { get; private set; }

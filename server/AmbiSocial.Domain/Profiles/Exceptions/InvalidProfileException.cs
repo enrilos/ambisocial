@@ -8,5 +8,5 @@ public class InvalidProfileException : BaseDomainException
     {
     }
 
-    public InvalidProfileException(string error) => Error = error;
+    public InvalidProfileException(string error) => this.Error = error;
 }
