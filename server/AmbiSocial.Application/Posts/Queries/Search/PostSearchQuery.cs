@@ -4,7 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 
 using Domain.Common;
-using Domain.Posts.Models.Posts;
+using Domain.Posts.Models;
 using Domain.Posts.Specifications.Posts;
 using MediatR;
 

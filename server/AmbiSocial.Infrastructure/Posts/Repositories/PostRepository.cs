@@ -12,7 +12,7 @@ using Common.Events;
 using Common.Extensions;
 using Common.Repositories;
 using Domain.Common;
-using Domain.Posts.Models.Posts;
+using Domain.Posts.Models;
 using Domain.Posts.Repositories;
 using Microsoft.EntityFrameworkCore;
 

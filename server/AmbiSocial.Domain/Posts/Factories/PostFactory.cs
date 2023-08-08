@@ -1,7 +1,7 @@
 ﻿namespace AmbiSocial.Domain.Posts.Factories;
 
 using Exceptions;
-using Models.Posts;
+using Models;
 using Profiles.Models;
 
 public class PostFactory : IPostFactory

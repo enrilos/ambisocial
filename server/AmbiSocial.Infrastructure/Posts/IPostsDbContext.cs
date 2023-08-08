@@ -1,7 +1,7 @@
 ﻿namespace AmbiSocial.Infrastructure.Posts;
 
 using Common.Persistance;
-using Domain.Posts.Models.Posts;
+using Domain.Posts.Models;
 using Microsoft.EntityFrameworkCore;
 
 internal interface IPostsDbContext : IDbContext

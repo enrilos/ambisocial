@@ -1,7 +1,7 @@
 ﻿namespace AmbiSocial.Domain.Posts.Factories;
 
 using Common;
-using Models.Posts;
+using Models;
 using Profiles.Models;
 
 public interface IPostFactory : IFactory<Post>

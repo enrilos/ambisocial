@@ -2,7 +2,7 @@
 
 using Application.Common.Mapping;
 using AutoMapper;
-using Domain.Posts.Models.Posts;
+using Domain.Posts.Models;
 
 public class PostResponseModel : IMapFrom<Post>
 {

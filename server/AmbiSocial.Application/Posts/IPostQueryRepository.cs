@@ -2,7 +2,7 @@
 
 using AmbiSocial.Domain.Common;
 using Common.Contracts;
-using Domain.Posts.Models.Posts;
+using Domain.Posts.Models;
 using Queries.Common;
 using Queries.Search;
 

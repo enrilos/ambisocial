@@ -4,7 +4,10 @@ using Common;
 
 public class PostCreatedEvent : IDomainEvent
 {
-    public PostCreatedEvent(string imageUrl, string description, string userName)
+    public PostCreatedEvent(
+        string imageUrl,
+        string description,
+        string userName)
     {
         this.ImageUrl = imageUrl;
         this.Description = description;

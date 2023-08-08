@@ -9,35 +9,20 @@ public class FollowerConfiguration : IEntityTypeConfiguration<Follower>
     public void Configure(EntityTypeBuilder<Follower> builder)
     {
         builder
-            .HasKey(new string[] { "FollowerId", "FollowedId" });
+            .HasKey(f => new { f.FollowerId, f.FollowedId });
 
         builder
-            .HasOne(x => x.FollowerProfile)
-            .WithMany()
-            .HasForeignKey("FollowerId")
+            .HasOne(f => f.FollowerProfile)
+            .WithMany(p => p.Followed)
+            .HasForeignKey(f => f.FollowerId)
             .IsRequired()
             .OnDelete(DeleteBehavior.Restrict);
 
         builder
-            .HasOne(x => x.FollowedProfile)
-            .WithMany()
-            .HasForeignKey("FollowedId")
+            .HasOne(f => f.FollowedProfile)
+            .WithMany(p => p.Followers)
+            .HasForeignKey(f => f.FollowedId)
             .IsRequired()
             .OnDelete(DeleteBehavior.Restrict);
-
-        /*builder
-            .HasKey(x => new { x.FollowerId, x.FollowedId });
-
-        builder
-            .HasOne(x => x.FollowerProfile)
-            .WithMany(x => x.Following)
-            .HasForeignKey(x => x.FollowerId)
-            .OnDelete(DeleteBehavior.Restrict);
-
-        builder
-            .HasOne(x => x.FollowedProfile)
-            .WithMany(x => x.Followers)
-            .HasForeignKey(x => x.FollowedId)
-            .OnDelete(DeleteBehavior.Restrict);*/
     }
 }

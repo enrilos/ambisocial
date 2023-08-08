@@ -43,7 +43,7 @@ public class PostEditCommand : PostCommand<PostEditCommand>, IRequest<Result<int
 
             post
                 .UpdateDescription(request.Description)
-                .UpdateProfile(profile);
+                .UpdateAuthor(profile);
 
             await this.postDomainRepository.Save(post);
 

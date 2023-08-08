@@ -1,7 +1,7 @@
 ﻿namespace AmbiSocial.Domain.Posts.Repositories;
 
 using Common;
-using Models.Posts;
+using Models;
 
 public interface IPostDomainRepository : IDomainRepository<Post>
 {

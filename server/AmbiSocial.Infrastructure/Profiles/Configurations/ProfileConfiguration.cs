@@ -1,5 +1,6 @@
 ﻿namespace AmbiSocial.Infrastructure.Profiles.Configurations;
 
+using Identity;
 using Domain.Profiles.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -11,23 +12,33 @@ public class ProfileConfiguration : IEntityTypeConfiguration<Profile>
     public void Configure(EntityTypeBuilder<Profile> builder)
     {
         builder
-            .HasKey(x => x.Id);
+            .HasKey(p => p.Id);
 
         builder
-            .HasIndex(x => x.UserName)
+            .HasIndex(p => p.UserName)
             .IsUnique();
 
         builder
-            .Property(x => x.UserName)
+            .Property(p => p.UserName)
             .HasMaxLength(MaxNameLength)
             .IsRequired();
 
         builder
-            .Property(x => x.AvatarUrl)
-            .HasMaxLength(MaxUrlLength);
+            .Property(p => p.AvatarUrl)
+            .HasMaxLength(MaxUrlLength)
+            .IsRequired(false);
 
         builder
-            .Property(x => x.Description)
-            .HasMaxLength(MaxDescriptionLength);
+            .Property(p => p.Description)
+            .HasMaxLength(MaxDescriptionLength)
+            .IsRequired(false);
+
+        builder
+            .HasOne<User>()
+            .WithOne()
+            .HasForeignKey<Profile>(p => p.UserName)
+            .HasPrincipalKey<User>(u => u.UserName)
+            .IsRequired()
+            .OnDelete(DeleteBehavior.Restrict);
     }
 }

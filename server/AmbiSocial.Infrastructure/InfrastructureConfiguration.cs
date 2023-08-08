@@ -47,7 +47,6 @@ public static class InfrastructureConfiguration
                 .GetService<AmbiSocialDbContext>()!)
             .AddTransient<IDbInitializer, AmbiSocialDbInitializer>();
 
-    // TODO: Use Scrutor
     private static IServiceCollection AddRepositories(this IServiceCollection services)
         => services
             .AddTransient<IProfileDomainRepository, ProfileRepository>()

@@ -1,6 +1,6 @@
 ﻿namespace AmbiSocial.Infrastructure.Posts.Configurations;
 
-using Domain.Posts.Models.Posts;
+using Domain.Posts.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -11,21 +11,22 @@ public class PostConfiguration : IEntityTypeConfiguration<Post>
     public void Configure(EntityTypeBuilder<Post> builder)
     {
         builder
-            .HasKey(x => x.Id);
+            .HasKey(p => p.Id);
 
         builder
-            .Property(x => x.ImageUrl)
+            .Property(p => p.ImageUrl)
             .HasMaxLength(MaxUrlLength)
             .IsRequired();
 
         builder
-            .Property(x => x.Description)
-            .HasMaxLength(MaxDescriptionLength);
+            .Property(p => p.Description)
+            .HasMaxLength(MaxDescriptionLength)
+            .IsRequired(false);
 
         builder
-            .HasOne(x => x.Profile)
-            .WithMany()
-            .HasForeignKey("ProfileId")
+            .HasOne(p => p.Profile)
+            .WithMany(p => p.Posts)
+            .HasForeignKey(p => p.ProfileId)
             .IsRequired()
             .OnDelete(DeleteBehavior.Restrict);
     }

@@ -2,10 +2,12 @@
 
 using System.Threading;
 using System.Threading.Tasks;
-
 using Common;
 using Common.Contracts;
 using Common.Models;
+using Domain.Common.Constants;
+using Domain.Common.Enums;
+using Domain.Profiles.Models;
 using Domain.Profiles.Repositories;
 using MediatR;
 
@@ -26,12 +28,19 @@ public class ProfileEditCommand : EntityCommand<int>, IRequest<Result<int>>
 
         public async Task<Result<int>> Handle(ProfileEditCommand request, CancellationToken cancellationToken)
         {
-            var profile = await this.profileDomainRepository
+            Profile? profile = await this.profileDomainRepository
                 .FindByUserName(this.currentUser.UserName, cancellationToken);
+
+            if (profile is null)
+            {
+                return Messages.NotFound(nameof(Profile));
+            }
 
             if (request.Id != profile.Id)
             {
-                return "Illegal modification of a profile";
+                return Messages.NotApplicable(
+                    Action.Update,
+                    nameof(Profile));
             }
 
             profile.UpdateDescription(request.Description);

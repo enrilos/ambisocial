@@ -2,7 +2,7 @@
 
 using System.Reflection;
 
-using Domain.Posts.Models.Posts;
+using Domain.Posts.Models;
 using Domain.Profiles.Models;
 using Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;

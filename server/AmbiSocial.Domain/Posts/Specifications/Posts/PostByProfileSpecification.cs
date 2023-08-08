@@ -2,9 +2,8 @@
 
 using System;
 using System.Linq.Expressions;
-
 using Common;
-using Models.Posts;
+using Models;
 
 public class PostByProfileSpecification : Specification<Post>
 {

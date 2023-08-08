@@ -3,7 +3,7 @@
 using System.Linq.Expressions;
 using System;
 
-using Domain.Posts.Models.Posts;
+using Domain.Posts.Models;
 using Application.Common;
 
 public class PostSearchSortOrder : SortOrder<Post>

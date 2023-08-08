@@ -1,9 +1,6 @@
 ﻿namespace AmbiSocial.Domain.Profiles.Models;
 
-using Common;
-using Common.Models;
-
-public class Follower : Entity<int>, IAggregateRoot
+public class Follower
 {
     public Follower(Profile follower, Profile followed)
     {

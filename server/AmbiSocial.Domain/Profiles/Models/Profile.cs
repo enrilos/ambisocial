@@ -5,7 +5,7 @@ using Common.Models;
 using Events;
 using Exceptions;
 using Posts.Exceptions;
-using Posts.Models.Posts;
+using Posts.Models;
 
 using static Common.Models.ModelConstants.Common;
 
@@ -13,7 +13,7 @@ public class Profile : Entity<int>, IAggregateRoot
 {
     private readonly HashSet<Post> posts;
     private readonly HashSet<Follower> followers;
-    private readonly HashSet<Follower> following;
+    private readonly HashSet<Follower> followed;
 
     internal Profile(
         string userName,
@@ -28,7 +28,7 @@ public class Profile : Entity<int>, IAggregateRoot
 
         this.posts = new();
         this.followers = new();
-        this.following = new();
+        this.followed = new();
     }
 
     public string UserName { get; private set; }
@@ -41,7 +41,7 @@ public class Profile : Entity<int>, IAggregateRoot
 
     public IReadOnlyCollection<Follower> Followers => this.followers.ToList().AsReadOnly();
 
-    public IReadOnlyCollection<Follower> Following => this.following.ToList().AsReadOnly();
+    public IReadOnlyCollection<Follower> Followed => this.followed.ToList().AsReadOnly();
 
     public Profile UpdateAvatarUrl(string avatarUrl)
     {
@@ -97,13 +97,13 @@ public class Profile : Entity<int>, IAggregateRoot
         return this;
     }
 
-    public Profile AddFollowing(Profile profile)
+    public Profile AddFollowed(Profile profile)
     {
         this.ValidateFollower(profile);
 
         Guard.AgainstNull<InvalidFollowerException>(profile, nameof(Follower));
 
-        this.following.Add(new Follower(this, profile));
+        this.followed.Add(new Follower(this, profile));
 
         this.RaiseEvent(new ProfileFollowedEvent(this.UserName, profile.UserName));
 

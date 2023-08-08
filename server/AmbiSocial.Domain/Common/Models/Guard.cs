@@ -4,9 +4,10 @@ using System;
 
 public static class Guard
 {
+    private const string DefaultValueName = "Value";
     private const string OutOfRangeExceptionTemplate = "{0} must be between {1} and {2}";
 
-    public static void AgainstNull<TException>(object value, string name = "Value")
+    public static void AgainstNull<TException>(object value, string name = DefaultValueName)
         where TException : BaseDomainException, new()
     {
         if (value is not null)
@@ -17,7 +18,7 @@ public static class Guard
         ThrowException<TException>($"{name} cannot be null");
     }
 
-    public static void AgainstNullOrEmpty<TException>(string value, string name = "Value")
+    public static void AgainstNullOrEmpty<TException>(string value, string name = DefaultValueName)
         where TException : BaseDomainException, new()
     {
         if (!string.IsNullOrWhiteSpace(value))
@@ -28,7 +29,7 @@ public static class Guard
         ThrowException<TException>($"{name} cannot be null or empty");
     }
 
-    public static void ForStringLength<TException>(string value, int min, int max, string name = "Value")
+    public static void ForStringLength<TException>(string value, int min, int max, string name = DefaultValueName)
         where TException : BaseDomainException, new()
     {
         AgainstNullOrEmpty<TException>(value, name);
@@ -41,7 +42,7 @@ public static class Guard
         ThrowException<TException>($"{string.Format(OutOfRangeExceptionTemplate, name, min, max)} characters long");
     }
 
-    public static void AgainstOutOfRange<TException>(int number, int min, int max, string name = "Value")
+    public static void AgainstOutOfRange<TException>(int number, int min, int max, string name = DefaultValueName)
         where TException : BaseDomainException, new()
     {
         if (min <= number && number <= max)
@@ -52,7 +53,7 @@ public static class Guard
         ThrowException<TException>(string.Format(OutOfRangeExceptionTemplate, name, min, max));
     }
 
-    public static void AgainstOutOfRange<TException>(decimal number, decimal min, decimal max, string name = "Value")
+    public static void AgainstOutOfRange<TException>(decimal number, decimal min, decimal max, string name = DefaultValueName)
         where TException : BaseDomainException, new()
     {
         if (min <= number && number <= max)
@@ -63,7 +64,7 @@ public static class Guard
         ThrowException<TException>(string.Format(OutOfRangeExceptionTemplate, name, min, max));
     }
 
-    public static void ForValidUrl<TException>(string url, string name = "Value")
+    public static void ForValidUrl<TException>(string url, string name = DefaultValueName)
         where TException : BaseDomainException, new()
     {
         AgainstNullOrEmpty<TException>(url, name);

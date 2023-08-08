@@ -1,23 +1,27 @@
-﻿namespace AmbiSocial.Domain.Posts.Models.Posts;
+﻿namespace AmbiSocial.Domain.Posts.Models;
 
 using Common;
 using Common.Models;
 using Events;
 using Exceptions;
+using Profiles.Exceptions;
 using Profiles.Models;
 
 using static Common.Models.ModelConstants.Common;
 
 public class Post : Entity<int>, IAggregateRoot
 {
-    internal Post(string imageUrl, string description, Profile profile)
+    internal Post(
+        string imageUrl,
+        string description,
+        Profile profile)
     {
         this.Validate(imageUrl, description, profile);
 
         this.ImageUrl = imageUrl;
         this.Description = description;
         this.Profile = profile;
-        this.Date = DateTime.UtcNow;
+        this.CreatedAt = DateTime.UtcNow;
 
         this.RaiseEvent(new PostCreatedEvent(
             this.ImageUrl,
@@ -29,7 +33,7 @@ public class Post : Entity<int>, IAggregateRoot
     {
         this.ImageUrl = imageUrl;
         this.Description = description;
-        this.Date = DateTime.UtcNow;
+        this.CreatedAt = DateTime.UtcNow;
 
         this.Profile = default!;
     }
@@ -38,9 +42,11 @@ public class Post : Entity<int>, IAggregateRoot
 
     public string Description { get; private set; }
 
-    public DateTime Date { get; private set; }
+    public DateTime CreatedAt { get; private set; }
 
     public Profile Profile { get; private set; }
+
+    public int ProfileId { get; private set; }
 
     public Post UpdateDescription(string description)
     {
@@ -58,9 +64,10 @@ public class Post : Entity<int>, IAggregateRoot
         return this;
     }
 
-    public Post UpdateProfile(Profile profile)
+    public Post UpdateAuthor(Profile profile)
     {
         this.Profile = profile;
+        this.ProfileId = profile.Id;
 
         return this;
     }
@@ -85,7 +92,7 @@ public class Post : Entity<int>, IAggregateRoot
             nameof(this.Description));
 
     private void ValidateProfile(Profile profile)
-        => Guard.AgainstNull<InvalidPostException>(
+        => Guard.AgainstNull<InvalidProfileException>(
             profile,
             nameof(this.Profile));
 }
