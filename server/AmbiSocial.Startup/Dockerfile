@@ -7,7 +7,7 @@ RUN dotnet publish "AmbiSocial.Startup/AmbiSocial.Startup.csproj" -c Release -o 
 FROM mcr.microsoft.com/dotnet/aspnet:7.0
 WORKDIR /app
 COPY --from=build /app/out .
-
 EXPOSE 80
+EXPOSE 443
 
 ENTRYPOINT ["dotnet", "AmbiSocial.Startup.dll"]

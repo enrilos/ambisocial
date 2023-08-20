@@ -1,23 +1,19 @@
 using AmbiSocial.Web;
+using AmbiSocial.Web.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
-
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-// builder.Services.AddSwaggerGen();
 
 builder.Services.AddWebComponents();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-// if (app.Environment.IsDevelopment())
-// {
-//     app.UseSwagger();
-//     app.UseSwaggerUI();
-// }
-
+app.UseSwagger(app.Environment);
 app.UseHttpsRedirection();
-
+app.UseRouting();
+app.UseCors(opts => opts
+    .AllowAnyOrigin()
+    .AllowAnyHeader()
+    .AllowAnyMethod());
 app.UseAuthorization();
 
 app.MapControllers();

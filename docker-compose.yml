@@ -1,0 +1,40 @@
+version: "3.3"
+
+services:
+
+  db:
+    image: "postgres:latest"
+    container_name: ambidb
+    ports:
+      - "5001:5432"
+    environment:
+      POSTGRES_USER: emre
+      POSTGRES_PASSWORD: test
+      POSTGRES_DB: ambisocial
+    restart: always
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - ambinetwork
+
+  aspnet:
+    container_name: ambiserver
+    build:
+      context: ./server
+      dockerfile: ./AmbiSocial.Startup/Dockerfile
+    ports:
+      - "5000:80"
+    env_file:
+      - ./server/AmbiSocial.Startup/.env
+    restart: always
+    networks:
+      - ambinetwork
+    depends_on:
+      - db
+
+networks:
+  ambinetwork:
+
+volumes:
+  postgres_data:
+  ambiserver:

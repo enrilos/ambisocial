@@ -6,7 +6,9 @@ public static class WebConfiguration
 {
     public static IServiceCollection AddWebComponents(this IServiceCollection services)
     {
-        services.AddControllers();
+        services
+            .AddSwaggerGen()
+            .AddControllers();
 
         return services;
     }
