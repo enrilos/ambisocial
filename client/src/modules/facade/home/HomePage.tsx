@@ -1,4 +1,4 @@
-import styles from './home.page.module.scss';
+import styles from './HomePage.module.scss';
 
 export interface IHomePageProps {
     abc?: string,
