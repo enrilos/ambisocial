@@ -12,10 +12,14 @@ export default ({ mode }) => {
 		},
 		resolve: {
 			alias: [
-				{ find: '@app', replacement: path.resolve(__dirname, 'src') },
-				{ find: '@components', replacement: path.resolve(__dirname, 'src/components') },
-				{ find: '@pages', replacement: path.resolve(__dirname, 'src/pages') }
+				{ find: '@modules', replacement: path.resolve(__dirname, 'src/modules') },
+				{ find: '@infrastructure', replacement: path.resolve(__dirname, 'src/infrastructure') }
 			]
+		},
+		css: {
+			modules: {
+				localsConvention: "camelCaseOnly"
+			}
 		}
 	});
 }

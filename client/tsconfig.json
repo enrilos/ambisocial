@@ -7,6 +7,9 @@
             "DOM.Iterable",
             "ESNext"
         ],
+        "types": [
+            "vite/client"
+        ],
         "allowJs": false,
         "skipLibCheck": true,
         "esModuleInterop": false,
@@ -21,14 +24,11 @@
         "jsx": "react-jsx",
         "baseUrl": "./",
         "paths": {
-            "@app/*": [
-                "src/*"
+            "@modules/*": [
+                "src/modules/*"
             ],
-            "@components/*": [
-                "src/components/*"
-            ],
-            "@pages/*": [
-                "src/pages/*"
+            "@infrastructure/*": [
+                "src/infrastructure/*"
             ]
         }
     },

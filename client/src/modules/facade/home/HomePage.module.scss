@@ -1,0 +1,11 @@
+@import '@infrastructure/ui/scss/variables';
+@import '@infrastructure/ui/scss/mixin';
+
+.super-text {
+    color: $color-main;
+    font-family: $font-main;
+
+    @include mobile {
+        color: blue;
+    }
+}
