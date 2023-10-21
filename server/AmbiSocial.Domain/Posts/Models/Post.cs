@@ -80,19 +80,14 @@ public class Post : Entity<int>, IAggregateRoot
     }
 
     private void ValidateUrl(string url)
-        => Guard.ForValidUrl<InvalidPostException>(
-            url,
-            nameof(this.ImageUrl));
+        => Ensure.Url<InvalidPostException>(url);
 
     private void ValidateDescription(string description)
-        => Guard.ForStringLength<InvalidPostException>(
+        => Ensure.Range<InvalidPostException>(
             description,
             MinDescriptionLength,
-            MaxDescriptionLength,
-            nameof(this.Description));
+            MaxDescriptionLength);
 
     private void ValidateProfile(Profile profile)
-        => Guard.AgainstNull<InvalidProfileException>(
-            profile,
-            nameof(this.Profile));
+        => Ensure.NotNull<InvalidProfileException>(profile);
 }

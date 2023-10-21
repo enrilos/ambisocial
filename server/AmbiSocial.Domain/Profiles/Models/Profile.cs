@@ -63,7 +63,7 @@ public class Profile : Entity<int>, IAggregateRoot
 
     public Profile AddPost(Post post)
     {
-        Guard.AgainstNull<InvalidPostException>(post);
+        Ensure.NotNull<InvalidPostException>(post);
 
         this.posts.Add(post);
 
@@ -88,7 +88,7 @@ public class Profile : Entity<int>, IAggregateRoot
     {
         this.ValidateFollower(profile);
 
-        Guard.AgainstNull<InvalidFollowerException>(profile, nameof(Follower));
+        Ensure.NotNull<InvalidFollowerException>(profile);
 
         this.followers.Add(new Follower(profile, this));
 
@@ -101,7 +101,7 @@ public class Profile : Entity<int>, IAggregateRoot
     {
         this.ValidateFollower(profile);
 
-        Guard.AgainstNull<InvalidFollowerException>(profile, nameof(Follower));
+        Ensure.NotNull<InvalidFollowerException>(profile);
 
         this.followed.Add(new Follower(this, profile));
 
@@ -122,23 +122,19 @@ public class Profile : Entity<int>, IAggregateRoot
     }
 
     private void ValidateUserName(string userName)
-        => Guard.ForStringLength<InvalidProfileException>(
+        => Ensure.Range<InvalidProfileException>(
             userName,
             MinNameLength,
-            MaxNameLength,
-            nameof(this.UserName));
+            MaxNameLength);
 
     private void ValidateAvatarUrl(string url)
-        => Guard.ForValidUrl<InvalidProfileException>(
-            url,
-            nameof(this.AvatarUrl));
+        => Ensure.Url<InvalidProfileException>(url);
 
     private void ValidateDescription(string description)
-        => Guard.ForStringLength<InvalidProfileException>(
+        => Ensure.Range<InvalidProfileException>(
             description,
             MinDescriptionLength,
-            MaxDescriptionLength,
-            nameof(this.Description));
+            MaxDescriptionLength);
 
     private void ValidateFollower(Profile follower)
     {
