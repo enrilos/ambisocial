@@ -5,18 +5,22 @@ using Common;
 public class PostCreatedEvent : IDomainEvent
 {
     public PostCreatedEvent(
+        int id,
         string imageUrl,
         string description,
-        string userName)
+        string profileUserName)
     {
+        this.Id = id;
         this.ImageUrl = imageUrl;
         this.Description = description;
-        this.UserName = userName;
+        this.ProfileUserName = profileUserName;
     }
+
+    public int Id { get; }
 
     public string ImageUrl { get; }
 
     public string Description { get; }
 
-    public string UserName { get; }
+    public string ProfileUserName { get; }
 }

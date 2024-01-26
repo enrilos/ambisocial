@@ -11,11 +11,26 @@ public abstract class Entity<TId> : IEntity where TId : struct
 
     public TId Id { get; private set; } = default;
 
+    public bool IsDeleted { get; private set; }
+
+    public DateTime? DeletedOn { get; private set; }
+
     public IReadOnlyCollection<IDomainEvent> Events => this.events.ToList().AsReadOnly();
 
     public void ClearEvents() => this.events.Clear();
 
     protected void RaiseEvent(IDomainEvent domainEvent) => this.events.Add(domainEvent);
+
+    public virtual void Delete(DateTime now)
+    {
+        if (this.IsDeleted)
+        {
+            throw new InvalidOperationException("Entity is already deleted");
+        }
+
+        this.IsDeleted = true;
+        this.DeletedOn = now;
+    }
 
     public override bool Equals(object? obj)
     {

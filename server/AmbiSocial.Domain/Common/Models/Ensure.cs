@@ -75,8 +75,8 @@ public static class Ensure
     {
         NotNullOrWhiteSpace<TException>(url, name);
 
-        if (url.Length <= ModelConstants.Common.MaxUrlLength &&
-            Uri.IsWellFormedUriString(url, UriKind.Absolute))
+        if (url.Length <= ModelConstants.Common.MaxUrlLength
+            && Uri.IsWellFormedUriString(url, UriKind.Absolute))
         {
             return;
         }

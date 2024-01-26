@@ -6,38 +6,40 @@ using Models;
 public class ProfileFactory : IProfileFactory
 {
     private string profileUserName = default!;
-    private string profileAvatarUrl = default!;
-    private string profileDescription = default!;
+    private string? profileAvatarUrl = default!;
+    private string? profileDescription = default!;
 
-    private bool isUserNameSet = false;
+    private bool hasUserName = false;
 
-    public IProfileFactory WithDescription(string description)
-    {
-        this.profileDescription = description;
-
-        return this;
-    }
-
-    public IProfileFactory WithAvatarUrl(string avatarUrl)
+    public IProfileFactory WithAvatarUrl(string? avatarUrl)
     {
         this.profileAvatarUrl = avatarUrl;
 
         return this;
     }
 
-    public IProfileFactory FromUserName(string userName)
+    public IProfileFactory WithBiography(string? biography)
+    {
+        this.profileDescription = biography;
+
+        return this;
+    }
+
+    public IProfileFactory WithUserName(string userName)
     {
         this.profileUserName = userName;
-        this.isUserNameSet = true;
+        this.hasUserName = true;
 
         return this;
     }
 
     public Profile Build()
     {
-        if (!this.isUserNameSet)
+        bool hasFilledRequiredFields = this.hasUserName;
+
+        if (!hasFilledRequiredFields)
         {
-            throw new InvalidProfileException("Username is required");
+            throw new InvalidProfileException();
         }
 
         return new Profile(this.profileUserName, this.profileAvatarUrl, this.profileDescription);

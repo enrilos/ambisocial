@@ -5,7 +5,9 @@ using Models;
 
 public interface IProfileFactory : IFactory<Profile>
 {
-    IProfileFactory WithDescription(string description);
+    IProfileFactory WithAvatarUrl(string? avatarUrl);
 
-    IProfileFactory FromUserName(string userName);
+    IProfileFactory WithBiography(string? biography);
+
+    IProfileFactory WithUserName(string userName);
 }

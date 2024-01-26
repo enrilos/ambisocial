@@ -1,5 +1,6 @@
 ﻿namespace AmbiSocial.Domain.Profiles.Models;
 
+using System;
 using Common;
 using Common.Models;
 using Events;
@@ -17,25 +18,31 @@ public class Profile : Entity<int>, IAggregateRoot
 
     internal Profile(
         string userName,
-        string avatarUrl,
-        string description)
+        string? avatarUrl,
+        string? biography)
     {
-        this.Validate(userName, avatarUrl, description);
+        this.Validate(userName, avatarUrl, biography);
 
         this.UserName = userName;
         this.AvatarUrl = avatarUrl;
-        this.Description = description;
+        this.Biography = biography;
 
         this.posts = new();
         this.followers = new();
         this.followed = new();
+
+        this.RaiseEvent(new ProfileCreatedEvent(
+            this.UserName,
+            this.AvatarUrl,
+            this.Biography
+        ));
     }
 
     public string UserName { get; private set; }
 
-    public string AvatarUrl { get; private set; }
+    public string? AvatarUrl { get; private set; }
 
-    public string Description { get; private set; }
+    public string? Biography { get; private set; }
 
     public IReadOnlyCollection<Post> Posts => this.posts.ToList().AsReadOnly();
 
@@ -43,20 +50,40 @@ public class Profile : Entity<int>, IAggregateRoot
 
     public IReadOnlyCollection<Follower> Followed => this.followed.ToList().AsReadOnly();
 
-    public Profile UpdateAvatarUrl(string avatarUrl)
+    public void Update(
+        string? avatarUrl,
+        string? biography)
     {
-        this.ValidateAvatarUrl(avatarUrl);
+        this.UpdateAvatarUrl(avatarUrl)
+            .UpdateBiography(biography);
+
+        this.RaiseEvent(new ProfileUpdatedEvent(
+            this.UserName,
+            this.AvatarUrl,
+            this.Biography
+        ));
+    }
+
+    public Profile UpdateAvatarUrl(string? avatarUrl)
+    {
+        if (avatarUrl is not null)
+        {
+            Ensure.Url<InvalidProfileException>(avatarUrl);
+        }
 
         this.AvatarUrl = avatarUrl;
 
         return this;
     }
 
-    public Profile UpdateDescription(string description)
+    public Profile UpdateBiography(string? biography)
     {
-        this.ValidateDescription(description);
+        if (biography is not null)
+        {
+            this.ValidateBiography(biography);
+        }
 
-        this.Description = description;
+        this.Biography = biography;
 
         return this;
     }
@@ -70,20 +97,11 @@ public class Profile : Entity<int>, IAggregateRoot
         return this;
     }
 
-    public Profile UpdatePostDescription(int postId, string description)
-    {
-        var profilePost = this.posts.SingleOrDefault(x => x.Id == postId);
-
-        if (profilePost is null)
-        {
-            throw new InvalidPostException("No such post exists for this profile");
-        }
-
-        profilePost.UpdateDescription(description);
-
-        return this;
-    }
-
+    /// <summary>
+    /// This Profile's Followers collection will be updated with the provided argument profile.
+    /// </summary>
+    /// <param name="profile"></param>
+    /// <returns></returns>
     public Profile AddFollower(Profile profile)
     {
         this.ValidateFollower(profile);
@@ -97,6 +115,11 @@ public class Profile : Entity<int>, IAggregateRoot
         return this;
     }
 
+    /// <summary>
+    /// This Profile will start following the provided argument profile.
+    /// </summary>
+    /// <param name="profile"></param>
+    /// <returns></returns>
     public Profile AddFollowed(Profile profile)
     {
         this.ValidateFollower(profile);
@@ -110,14 +133,25 @@ public class Profile : Entity<int>, IAggregateRoot
         return this;
     }
 
-    private void Validate(string userName, string avatarUrl, string description)
+    public override void Delete(DateTime now)
+    {
+        base.Delete(now);
+
+        this.RaiseEvent(new ProfileDeletedEvent(this.UserName));
+    }
+
+    private void Validate(string userName, string? avatarUrl, string? biography)
     {
         this.ValidateUserName(userName);
-        this.ValidateAvatarUrl(avatarUrl);
 
-        if (description is not null)
+        if (avatarUrl is not null)
         {
-            this.ValidateDescription(description);
+            Ensure.Url<InvalidProfileException>(avatarUrl);
+        }
+
+        if (biography is not null)
+        {
+            this.ValidateBiography(biography);
         }
     }
 
@@ -127,20 +161,15 @@ public class Profile : Entity<int>, IAggregateRoot
             MinNameLength,
             MaxNameLength);
 
-    private void ValidateAvatarUrl(string url)
-        => Ensure.Url<InvalidProfileException>(url);
-
-    private void ValidateDescription(string description)
+    private void ValidateBiography(string biography)
         => Ensure.Range<InvalidProfileException>(
-            description,
+            biography,
             MinDescriptionLength,
             MaxDescriptionLength);
 
     private void ValidateFollower(Profile follower)
     {
-        if (this == follower
-            || this.Id == follower.Id
-            || this.UserName == follower.UserName)
+        if (this == follower)
         {
             throw new InvalidFollowerException();
         }

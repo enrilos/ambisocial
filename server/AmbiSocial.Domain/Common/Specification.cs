@@ -34,5 +34,5 @@ public abstract class Specification<T>
     public static implicit operator Expression<Func<T, bool>>(Specification<T> specification)
         => specification.Include
             ? specification.ToExpression()
-            : value => true;
+            : _ => true;
 }

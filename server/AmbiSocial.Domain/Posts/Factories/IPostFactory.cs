@@ -6,9 +6,9 @@ using Profiles.Models;
 
 public interface IPostFactory : IFactory<Post>
 {
-    IPostFactory WithImageUrl(string imageUrl);
+    IPostFactory WithImage(string url);
 
     IPostFactory WithDescription(string description);
 
-    IPostFactory FromProfile(Profile profile);
+    IPostFactory ForProfile(Profile profile);
 }

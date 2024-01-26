@@ -6,47 +6,48 @@ using Profiles.Models;
 
 public class PostFactory : IPostFactory
 {
-    private string postImageUrl = default!;
-    private string postDescription = default!;
-    private Profile postProfile = default!;
+    private string imageUrl = default!;
+    private string description = default!;
+    private Profile profile = default!;
 
-    private bool isImageUrlSet = false;
-    private bool isProfileSet = false;
+    private bool hasDescription = false;
+    private bool hasProfile = false;
 
-    public IPostFactory WithImageUrl(string imageUrl)
+    public IPostFactory WithImage(string imageUrl)
     {
-        this.postImageUrl = imageUrl;
-        this.isImageUrlSet = true;
+        this.imageUrl = imageUrl;
 
         return this;
     }
 
     public IPostFactory WithDescription(string description)
     {
-        this.postDescription = description;
+        this.description = description;
+        this.hasDescription = true;
+
         return this;
     }
 
-    public IPostFactory FromProfile(Profile profile)
+    public IPostFactory ForProfile(Profile profile)
     {
-        this.postProfile = profile;
-        this.isProfileSet = true;
+        this.profile = profile;
+        this.hasProfile = true;
 
         return this;
     }
 
     public Post Build()
     {
-        bool areRequiredFieldsSet = this.isImageUrlSet && this.isProfileSet;
+        bool hasFilledRequiredFields = this.hasDescription && this.hasProfile;
 
-        if (!areRequiredFieldsSet)
+        if (!hasFilledRequiredFields)
         {
-            throw new InvalidPostException("Image and profile must have a value");
+            throw new InvalidPostException();
         }
 
         return new Post(
-            this.postImageUrl,
-            this.postDescription,
-            this.postProfile);
+            this.imageUrl,
+            this.description,
+            this.profile);
     }
 }

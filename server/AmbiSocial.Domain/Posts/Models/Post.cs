@@ -21,19 +21,20 @@ public class Post : Entity<int>, IAggregateRoot
         this.ImageUrl = imageUrl;
         this.Description = description;
         this.Profile = profile;
-        this.CreatedAt = DateTime.UtcNow;
 
         this.RaiseEvent(new PostCreatedEvent(
+            this.Id,
             this.ImageUrl,
             this.Description,
             this.Profile.UserName));
     }
 
-    private Post(string imageUrl, string description)
+    private Post(
+        string imageUrl,
+        string description)
     {
         this.ImageUrl = imageUrl;
         this.Description = description;
-        this.CreatedAt = DateTime.UtcNow;
 
         this.Profile = default!;
     }
@@ -42,52 +43,52 @@ public class Post : Entity<int>, IAggregateRoot
 
     public string Description { get; private set; }
 
-    public DateTime CreatedAt { get; private set; }
-
     public Profile Profile { get; private set; }
 
-    public int ProfileId { get; private set; }
+    public void Update(string description)
+    {
+        this.UpdateDescription(description);
+
+        this.RaiseEvent(new PostUpdatedEvent(
+            this.Id,
+            this.Description));
+    }
 
     public Post UpdateDescription(string description)
     {
-        if (this.Description != description)
-        {
-            this.ValidateDescription(description);
+        this.ValidateDescription(description);
 
-            this.Description = description;
-
-            this.RaiseEvent(new PostDescriptionUpdatedEvent(
-                this.Id,
-                this.Description));
-        }
+        this.Description = description;
 
         return this;
     }
 
-    public Post UpdateAuthor(Profile profile)
+    public override void Delete(DateTime now)
     {
-        this.Profile = profile;
-        this.ProfileId = profile.Id;
+        base.Delete(now);
 
-        return this;
+        this.RaiseEvent(new PostDeletedEvent(this.Id));
     }
 
     private void Validate(string imageUrl, string description, Profile profile)
     {
-        this.ValidateUrl(imageUrl);
+        if (imageUrl is not null)
+        {
+            Ensure.Url<InvalidPostException>(imageUrl);
+        }
+
         this.ValidateDescription(description);
-        this.ValidateProfile(profile);
+
+        Ensure.NotNull<InvalidProfileException>(profile);
     }
 
-    private void ValidateUrl(string url)
-        => Ensure.Url<InvalidPostException>(url);
-
     private void ValidateDescription(string description)
-        => Ensure.Range<InvalidPostException>(
-            description,
-            MinDescriptionLength,
-            MaxDescriptionLength);
+    {
+        Ensure.NotNullOrWhiteSpace<InvalidPostException>(description);
 
-    private void ValidateProfile(Profile profile)
-        => Ensure.NotNull<InvalidProfileException>(profile);
+        Ensure.Range<InvalidPostException>(
+                description,
+                MinDescriptionLength,
+                MaxDescriptionLength);
+    }
 }
