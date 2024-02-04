@@ -3,18 +3,15 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Common;
-using Common.Contracts;
-using Common.Models;
+using Application.Common.Contracts;
+using Application.Common.Models;
 using Domain.Common.Constants;
-using Domain.Common.Enums;
 using Domain.Profiles.Models;
 using Domain.Profiles.Repositories;
 using MediatR;
 
-public class ProfileEditCommand : EntityCommand<int>, IRequest<Result<int>>
+public class ProfileEditCommand : ProfileCommand<ProfileEditCommand>, IRequest<Result<int>>
 {
-    public string Description { get; init; } = default!;
-
     public class ProfileEditCommandHandler : IRequestHandler<ProfileEditCommand, Result<int>>
     {
         private readonly ICurrentUser currentUser;
@@ -28,22 +25,14 @@ public class ProfileEditCommand : EntityCommand<int>, IRequest<Result<int>>
 
         public async Task<Result<int>> Handle(ProfileEditCommand request, CancellationToken cancellationToken)
         {
-            Profile? profile = await this.profileDomainRepository
-                .FindByUserName(this.currentUser.UserName, cancellationToken);
+            Profile? profile = await this.profileDomainRepository.Find(this.currentUser.Id, cancellationToken);
 
             if (profile is null)
             {
                 return Messages.NotFound(nameof(Profile));
             }
 
-            if (request.Id != profile.Id)
-            {
-                return Messages.NotApplicable(
-                    Action.Update,
-                    nameof(Profile));
-            }
-
-            profile.UpdateDescription(request.Description);
+            profile.Update(request.AvatarUrl, request.Biography);
 
             await this.profileDomainRepository.Save(profile, cancellationToken);
 

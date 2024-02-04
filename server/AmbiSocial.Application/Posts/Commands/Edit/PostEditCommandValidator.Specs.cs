@@ -30,7 +30,7 @@ public class PostEditCommandValidatorSpecs
         {
             ImageUrl = imageUrl,
             Description = description,
-            AuthorUserName = author
+            ProfileUserName = author
         };
 
         var result = validator.TestValidate(editCommand);
@@ -38,7 +38,7 @@ public class PostEditCommandValidatorSpecs
         result.IsValid.Should().BeFalse();
         result.ShouldHaveValidationErrorFor(x => x.ImageUrl);
         result.ShouldHaveValidationErrorFor(x => x.Description);
-        result.ShouldHaveValidationErrorFor(x => x.AuthorUserName);
+        result.ShouldHaveValidationErrorFor(x => x.ProfileUserName);
     }
 
     [Theory]
@@ -49,7 +49,7 @@ public class PostEditCommandValidatorSpecs
         {
             ImageUrl = imageUrl,
             Description = description,
-            AuthorUserName = author
+            ProfileUserName = author
         };
 
         var result = validator.TestValidate(editCommand);
@@ -57,7 +57,7 @@ public class PostEditCommandValidatorSpecs
         result.IsValid.Should().BeTrue();
         result.ShouldNotHaveValidationErrorFor(x => x.ImageUrl);
         result.ShouldNotHaveValidationErrorFor(x => x.Description);
-        result.ShouldNotHaveValidationErrorFor(x => x.AuthorUserName);
+        result.ShouldNotHaveValidationErrorFor(x => x.ProfileUserName);
     }
 
     public static IEnumerable<object[]> InvalidData()

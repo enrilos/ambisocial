@@ -7,9 +7,9 @@ using Models;
 
 public class PostByProfileUserNameSpecification : Specification<Post>
 {
-    private readonly string profileUserName;
+    private readonly string? profileUserName;
 
-    public PostByProfileUserNameSpecification(string profileUserName)
+    public PostByProfileUserNameSpecification(string? profileUserName)
         => this.profileUserName = profileUserName;
 
     protected override bool Include => this.profileUserName != null;

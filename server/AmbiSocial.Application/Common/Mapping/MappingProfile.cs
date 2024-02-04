@@ -1,7 +1,6 @@
 ﻿namespace AmbiSocial.Application.Common.Mapping;
 
 using System.Reflection;
-
 using AutoMapper;
 
 public class MappingProfile : Profile

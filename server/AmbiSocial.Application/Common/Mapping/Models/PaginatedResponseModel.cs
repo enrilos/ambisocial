@@ -2,7 +2,10 @@
 
 public abstract class PaginatedResponseModel<TResponseModel>
 {
-    protected internal PaginatedResponseModel(IEnumerable<TResponseModel> models, int page, int totalPages)
+    protected internal PaginatedResponseModel(
+        IEnumerable<TResponseModel> models,
+        int page,
+        int totalPages)
     {
         this.Models = models;
         this.Page = page;

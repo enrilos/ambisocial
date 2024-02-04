@@ -1,12 +1,13 @@
 ﻿namespace AmbiSocial.Application.Posts.Handlers;
 
 using System.Threading.Tasks;
-
 using Common.Contracts;
 using Common.Exceptions;
 using Domain.Posts.Events;
 using Domain.Posts.Factories;
 using Domain.Posts.Repositories;
+using Domain.Posts.Models;
+using Domain.Profiles.Models;
 using Domain.Profiles.Repositories;
 
 public class PostCreatedEventHandler : IEventHandler<PostCreatedEvent>
@@ -27,17 +28,17 @@ public class PostCreatedEventHandler : IEventHandler<PostCreatedEvent>
 
     public async Task Handle(PostCreatedEvent domainEvent)
     {
-        var profile = await this.profileDomainRepository.FindByUserName(domainEvent.UserName);
+        Profile? profile = await this.profileDomainRepository.Find(domainEvent.ProfileUserName);
 
         if (profile is null)
         {
-            throw new NotFoundException(nameof(profile), domainEvent.UserName);
+            throw new NotFoundException(nameof(Profile), domainEvent.ProfileUserName);
         }
 
-        var post = this.postFactory
-            .WithImageUrl(domainEvent.ImageUrl)
+        Post post = this.postFactory
+            .WithImage(domainEvent.ImageUrl)
             .WithDescription(domainEvent.Description)
-            .FromProfile(profile)
+            .ForProfile(profile)
             .Build();
 
         await this.postDomainRepository.Save(post);

@@ -7,7 +7,7 @@ public class PostCommand<TCommand> : EntityCommand<int>
 {
     public required string ImageUrl { get; init; }
 
-    public required string AuthorUserName { get; init; }
+    public required string ProfileUserName { get; init; }
 
-    public string? Description { get; init; }
+    public required string Description { get; init; }
 }

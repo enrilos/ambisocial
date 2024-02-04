@@ -10,7 +10,7 @@ using MediatR;
 
 public class PostSearchQuery : IRequest<PostSearchResponseModel>
 {
-    private const int PerPage = 27;
+    private const int PerPage = 6;
 
     public string? Author { get; init; }
 
@@ -52,6 +52,6 @@ public class PostSearchQuery : IRequest<PostSearchResponseModel>
         }
 
         private Specification<Post> GetSpecification(PostSearchQuery query)
-            => new PostByProfileSpecification(query.Author);
+            => new PostByProfileUserNameSpecification(query.Author);
     }
 }

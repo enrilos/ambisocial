@@ -8,9 +8,9 @@ using Models;
 
 public class ProfileByUserNameSpecification : Specification<Profile>
 {
-    private readonly string userName;
+    private readonly string? userName;
 
-    public ProfileByUserNameSpecification(string userName) => this.userName = userName;
+    public ProfileByUserNameSpecification(string? userName) => this.userName = userName;
 
     protected override bool Include => this.userName != null;
 

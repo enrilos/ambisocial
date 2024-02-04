@@ -1,5 +1,5 @@
 ﻿namespace AmbiSocial.Application.Identity;
-    
+
 using Common.Models;
 using Commands.Common;
 

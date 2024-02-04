@@ -23,8 +23,8 @@ public class UserRegisteredEventHandler : IEventHandler<UserRegisteredEvent>
     public async Task Handle(UserRegisteredEvent domainEvent)
     {
         var profile = this.profileFactory
-            .WithDescription(DefaultDescription)
-            .FromUserName(domainEvent.UserName)
+            .WithBiography(DefaultDescription)
+            .WithUserName(domainEvent.UserName)
             .Build();
 
         await this.profileDomainRepository.Save(profile);

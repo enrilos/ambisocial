@@ -9,11 +9,11 @@ public interface IProfileDomainRepository : IDomainRepository<Profile>
         int id,
         CancellationToken cancellationToken = default);
 
-    Task<Profile?> FindByUserName(
+    Task<Profile?> Find(
         string userName,
         CancellationToken cancellationToken = default);
 
-    Task<bool> DeleteByUserName(
+    Task<bool> Delete(
         string userName,
         CancellationToken cancellationToken = default);
 }

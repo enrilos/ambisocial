@@ -12,7 +12,7 @@ public class ProfilesSearchQuery : IRequest<ProfilesSearchResponseModel>
 {
     private const int PerPage = 9;
 
-    public string UserName { get; init; }
+    public string? UserName { get; init; }
 
     public int Page { get; init; } = 1;
 

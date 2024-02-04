@@ -13,13 +13,13 @@ public class PostCommandValidator<TCommand> : AbstractValidator<PostCommand<TCom
         this.RuleFor(x => x.ImageUrl)
             .MaximumLength(MaxUrlLength)
             .Must(url => Uri.IsWellFormedUriString(url, UriKind.Absolute))
-            .WithMessage("{PropertyName} must be a valid url")
+            .WithMessage("'{PropertyName}' must be a valid url")
             .NotEmpty();
 
         this.RuleFor(x => x.Description)
             .MaximumLength(MaxDescriptionLength);
 
-        this.RuleFor(x => x.AuthorUserName)
+        this.RuleFor(x => x.ProfileUserName)
             .MinimumLength(MinNameLength)
             .MaximumLength(MaxNameLength)
             .NotEmpty();

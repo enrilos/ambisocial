@@ -2,48 +2,39 @@
 
 using System.Threading;
 using System.Threading.Tasks;
-
+using Application.Common.Contracts;
 using Application.Common.Exceptions;
 using Application.Common.Models;
 using Common;
 using Domain.Posts.Repositories;
-using Domain.Profiles.Repositories;
+using Domain.Posts.Models;
 using MediatR;
 
 public class PostEditCommand : PostCommand<PostEditCommand>, IRequest<Result<int>>
 {
     public class PostEditCommandHandler : IRequestHandler<PostEditCommand, Result<int>>
     {
+        private readonly ICurrentUser currentUser;
         private readonly IPostDomainRepository postDomainRepository;
-        private readonly IProfileDomainRepository profileDomainRepository;
 
         public PostEditCommandHandler(
-            IPostDomainRepository postDomainRepository,
-            IProfileDomainRepository profileDomainRepository)
+            ICurrentUser currentUser,
+            IPostDomainRepository postDomainRepository)
         {
+            this.currentUser = currentUser;
             this.postDomainRepository = postDomainRepository;
-            this.profileDomainRepository = profileDomainRepository;
         }
 
         public async Task<Result<int>> Handle(PostEditCommand request, CancellationToken cancellationToken)
         {
-            var post = await this.postDomainRepository.Find(request.Id, cancellationToken);
+            Post? post = await this.postDomainRepository.Find(request.Id, cancellationToken);
 
             if (post is null)
             {
-                throw new NotFoundException(nameof(post), request.Id);
+                throw new NotFoundException(nameof(Post), request.Id);
             }
 
-            var profile = await this.profileDomainRepository.FindByUserName(request.AuthorUserName, cancellationToken);
-
-            if (profile is null)
-            {
-                throw new NotFoundException(nameof(profile), request.Id);
-            }
-
-            post
-                .UpdateDescription(request.Description)
-                .UpdateAuthor(profile);
+            post.UpdateDescription(request.Description);
 
             await this.postDomainRepository.Save(post);
 
